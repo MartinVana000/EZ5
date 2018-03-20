@@ -2,7 +2,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileReader;
 import java.io.FileWriter;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -38,7 +37,7 @@ class frame extends JFrame {
 		    		text = text + (char)c;
 		    	 }
 		    	 System.out.print(text);
-		    	 //////////////
+		    	 fr.close();
 		    	 	byte[] txt = text.getBytes();
 		    	 	byte[] key = heslo.getText().getBytes();
 		    		byte[] res = new byte[text.length()];
@@ -48,27 +47,24 @@ class frame extends JFrame {
 		    		String text2 = new String(res);
 		    		vystup.setText(text2);
 		    		try {
-				    FileWriter write = new FileWriter(vstup2.getText());
-				    int c2;
-				    while((c2 = fr.read())!=-1) {
-				    	write.write(c2);
-				    }
+		    		System.out.println(vstup2.getText());
+				    FileWriter write = new FileWriter(vstup2.getText(), false);
+				    write.write(text2);
 				    write.close();
 		    		} catch(Exception t) {
 		    			System.out.println("Problem");
 		    	
 		    		}
-		    	 //////////////
 		    	 } catch(Exception k) {
 		 			System.out.println("Problem");
 		 		}
 		     }
 		});
-	
 		p.add(button1);
 		p.add(vstup);
 		p.add(heslo);
 		p.add(vystup);
+		p.add(vstup2);
 		add(p);
 	} 
 }
