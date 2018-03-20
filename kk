@@ -1,19 +1,7 @@
-import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -24,8 +12,6 @@ public class Main {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    f.setVisible(true);
 	}
-	
-	
 }
 
 class frame extends JFrame {
@@ -48,10 +34,21 @@ class frame extends JFrame {
 		    	 while((c= fr.read())!=-1) {
 		    		text = text + (char)c;
 		    	 }
+		    	 System.out.print(text);
+		    	 //////////////
+		    	 	byte[] txt = text.getBytes();
+		    	 	byte[] key = heslo.getText().getBytes();
+		    		byte[] res = new byte[text.length()];
+		    		for (int i = 0; i < txt.length; i++) {
+		    			res[i] = (byte) (txt[i] ^ key[i % key.length]);
+		    		}
+		    		String text2 = new String(res);
+		    		vystup.setText(text2);
+		    		
+		    	 //////////////
 		    	 fr.close();
 		    	 } catch(Exception k) {
 		 			System.out.println("Problem");
-		 	
 		 		}
 		     }
 		});
