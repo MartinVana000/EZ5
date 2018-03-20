@@ -1,6 +1,8 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileReader;
+import java.io.FileWriter;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,6 +24,7 @@ class frame extends JFrame {
 		JTextField vstup = new JTextField("vstup", 10);
 		JTextField heslo = new JTextField("heslo", 10);
 		JTextField vystup = new JTextField("vystup", 10);
+		JTextField vstup2 = new JTextField("vystup - kam ulozit", 10);
 		vstup.setSize(200, 200);
 		JButton button1 = new JButton("Sifrovany");
 		button1.addActionListener(new ActionListener() {
@@ -44,9 +47,18 @@ class frame extends JFrame {
 		    		}
 		    		String text2 = new String(res);
 		    		vystup.setText(text2);
-		    		
+		    		try {
+				    FileWriter write = new FileWriter(vstup2.getText());
+				    int c2;
+				    while((c2 = fr.read())!=-1) {
+				    	write.write(c2);
+				    }
+				    write.close();
+		    		} catch(Exception t) {
+		    			System.out.println("Problem");
+		    	
+		    		}
 		    	 //////////////
-		    	 fr.close();
 		    	 } catch(Exception k) {
 		 			System.out.println("Problem");
 		 		}
